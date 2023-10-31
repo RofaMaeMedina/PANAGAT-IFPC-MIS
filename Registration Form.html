@@ -1,0 +1,119 @@
+<html>
+    <head>
+        <title>panagat-ifpc-mis</title>
+        <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+        <script src="https://code.jquery.com/jquery-3.7.1.slim.js"></script>
+
+        <script>
+           const firebaseConfig = {
+  apiKey: "AIzaSyBnVWx6uGh7j5wvQk00dBEIY8XvIVC4uE0",
+  authDomain: "panagat-ifpc-mis.firebaseapp.com",
+  projectId: "panagat-ifpc-mis",
+  storageBucket: "panagat-ifpc-mis.appspot.com",
+  messagingSenderId: "132738155686",
+  appId: "1:132738155686:web:a59bb14bfce9353236a067",
+  measurementId: "G-QZP2BH174B"
+};
+
+          
+
+firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
+
+        $(document).ready(function () {
+            $("#addData").click(function () {
+                var captains = $("#captain").val();
+                var vname = $("#vname").val();
+                var pnumber = $("#pnumber").val();
+                var involvement = $("#Purpose_of_Fishing").val();
+                var password = $("#password").val();
+                var registrationDate = $("#registrationDate").val();
+
+                var username = vname;
+
+                db.ref("ship/" + vname).set({
+                    name: vname,
+                    captain: captains,
+                    platenumber: pnumber,
+                    involvement: involvement,
+                    password: password,
+                    registrationDate: registrationDate,
+                })
+                .then(() => {
+                    alert("Data successfully saved!");
+                    console.log("Data successfully saved!");
+
+                    // Clear the registration form after successful registration
+                    $("#captain").val("");
+                    $("#vname").val("");
+                    $("#pnumber").val("");
+                    $("#Purpose_of_Fishing").val("");
+                    $("#password").val("");
+                    $("#registrationDate").val("");
+                })
+                .catch((error) => {
+                    console.error("Error saving data: ", error);
+                });
+            });
+
+            function updateUI(data) {
+                $("#cpt").text(data.captain);
+                $("#mv").text(data.name);
+            }
+
+            const shipRef = db.ref("ship/MV Jake");
+            shipRef.on("value", (snapshot) => {
+                const data = snapshot.val();
+                updateUI(data);
+            });
+
+            $("#loginBtn").click(function () {
+                var username = $("#vname").val();
+                var password = $("#password").val();
+
+                db.ref("ship/" + username).once("value").then(function(snapshot) {
+                    var userData = snapshot.val();
+                    if (userData && userData.password === password) {
+                        $("#Bname").text("Login successful");
+                    } else {
+                        $("#Bname").text("Login failed: Invalid username or password");
+                    }
+                }).catch(function(error) {
+                    console.error("Error during login: ", error);
+                    $("#Bname").text("Login failed: An error occurred");
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>REGISTRATION FORM</h1>
+    <div>
+        <input type="text" value="" id="captain" placeholder="Captain" />
+        <input type="text" value="" id="vname" placeholder="Vessel Name" />
+        <input type="text" value="" id="pnumber" placeholder="Plate Number" />
+        <input type="text" value="" id="Purpose_of_Fishing" placeholder="Purpose of Fishing" />
+        <input type="password" value="" id="password" placeholder="Password" />
+        <input type="date" value="" id="registrationDate" placeholder="Registration Date" />
+        <button id="addData">Save</button>
+    </div>
+
+    <div id="result">
+        <h1 id="cpt"></h1>
+        <h1 id="mv"></h1>
+    </div>
+
+    <h1>LOG IN FORM</h1>
+    <div>
+        <input type="text" value="" id="vname" placeholder="Vessel Name" />
+        <input type="password" value="" id="password" placeholder="Password" />
+        <button id="loginBtn">Login</button>
+    </div>
+    <div id="result">
+        <h1 id="Bname"></h1>
+    </div>
+</body>
+</html>
