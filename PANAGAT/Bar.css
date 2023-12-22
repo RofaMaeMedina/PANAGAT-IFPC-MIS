@@ -1,0 +1,20 @@
+.chart-container {
+  position: relative;
+  display: inline-block;
+  margin: 20px;
+}
+
+#piechart {
+  width: 500px;
+  height: 400px;
+}
+
+#linechart_material {
+  width: 200px;
+  height: 200px;
+}
+
+#barchart_material {
+  width: 200px;
+  height: 300px;
+}

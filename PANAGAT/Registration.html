@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <meta charset="UTF-8">
+  <title>PANAGAT Registration Form</title>
+  <link rel="stylesheet" href="Registration.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://code.jquery.com/jquery-3.6.4.slim.min.js"></script>
+</head>
+
+<body>
+
+  <a href="Admin.html"><div class="exit"><i class="far fa-times-circle"></i></div></a>
+
+  <div class="container">
+    <div class="title">Registration</div>
+    <div class="content">
+      <form id="registrationForm">
+        <div class="user-details">
+          <div class="input-box">
+            <span class="details">Owner</span>
+            <input type="text" id="owner" placeholder="Enter your name" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Captain</span>
+            <input type="text" id="captain" placeholder="Enter your username" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Contact Number</span>
+            <input type="text" id="contactNumber" placeholder="Enter your contact number" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Type of Vessel</span>
+            <input type="text" id="vesselType" placeholder="Enter your vessel number" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Model Year</span>
+            <input type="text" id="modelYear" placeholder="Enter your password" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Hull ID</span>
+            <input type="text" id="hullId" placeholder="Confirm your I.D" required>
+          </div>
+        </div>
+        <div class="gender-details">
+          <span class="gender-title">Purpose of Fishing</span>
+          <div class="category">
+            <label for="commercial">
+              <input type="radio" id="commercial" name="purpose" value="Commercial" required>
+              <span class="dot one"></span>
+              <span class="gender">Commercial</span>
+            </label>
+            <label for="recreational">
+              <input type="radio" id="recreational" name="purpose" value="Recreational" required>
+              <span class="dot two"></span>
+              <span class="gender">Recreational</span>
+            </label>
+            <label for="artisanal">
+              <input type="radio" id="artisanal" name="purpose" value="Artisanal" required>
+              <span class="dot three"></span>
+              <span class="gender">Artisanal</span>
+            </label>
+          </div>
+        </div>
+        <div class="button">
+          <input type="submit" value="Register">
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script type="module" src="js/login.js"></script>
+</body>
+</html>

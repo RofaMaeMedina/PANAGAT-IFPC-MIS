@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <h1> <center><b>PRODUCT</b></center></h1>
+    <title> PRODUCT </title>
+
+   
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
+    <style>
+        .table-header-blue {
+            background-color: #007bff;
+            color: #fff; 
+        }
+        .exit{
+            position: absolute;
+            top: 10px;
+            left: 30px;
+            color:  rgb(252, 98, 98);
+            font-size: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <a href="Admin.html"><div class="exit"><i class="far fa-times-circle"></i></div></a>
+
+    <div class="container mt-3"> 
+        <table class="table"> 
+            <thead class="table-header-blue"> 
+                <th>No</th>
+                <th>Boat No.</th>
+                <th>Category</th>
+                <th>Kg</th>
+                <th>Total</th>
+            </thead>
+            <tbody id="tbody1"></tbody>
+        </table>
+    </div>
+
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script>
+        var studio = 0;
+        var tbody = document.getElementById("tbody1");
+        var theStudent = [
+            { BoatNo: "001", Category: "Fishing", Kg: "500", Total: "1500" },
+            { BoatNo: "002", Category: "Sailing", Kg: "300", Total: "1200" }
+           
+        ];
+
+        function AddItemToTable(BoatNo, Category, Kg, Total) {
+            let tr = document.createElement("tr");
+            let td1 = document.createElement("td");
+            let td2 = document.createElement("td");
+            let td3 = document.createElement("td");
+            let td4 = document.createElement("td");
+            let td5 = document.createElement("td");
+
+            studio++;
+            td1.innerHTML = studio;
+            td2.innerHTML = BoatNo;
+            td3.innerHTML = Category;
+            td4.innerHTML = Kg;
+            td5.innerHTML = Total;
+
+            tr.appendChild(td1);
+            tr.appendChild(td2);
+            tr.appendChild(td3);
+            tr.appendChild(td4);
+            tr.appendChild(td5);
+
+            tbody.appendChild(tr);
+        }
+
+        function PopulateTable() {
+            studio = 0;
+            tbody.innerHTML = "";
+            theStudent.forEach(element => {
+                AddItemToTable(element.BoatNo, element.Category, element.Kg, element.Total);
+            });
+        }
+
+       
+        PopulateTable();
+
+        function GetallDataOnce(){
+            const dbRef = ref(db);
+
+            get (child(dbref, "Boat_List"))
+            .then((snapshot)=>{
+                var boat =[];
+                snapshot.forEach(boatsnapshot =>{
+                   boat.push(boatsnapshot.val());
+                });
+                AddItemToTable(boat);
+            });
+            window.onload=GetallDataOnce
+        }
+    </script>
+</body>
+</html>

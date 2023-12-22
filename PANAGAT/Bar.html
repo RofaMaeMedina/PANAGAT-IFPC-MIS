@@ -1,0 +1,134 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <link rel="stylesheet" type="text/css" href="Baxr.css"> <!-- Include your CSS file here -->
+    <style>
+      body {
+        text-align: center;
+      }
+
+      .chart-container {
+        position: relative;
+        display: inline-block;
+        margin: 20px;
+        text-align: left; /* Align text within the chart container to the left */
+      }
+
+      .chart {
+        width: 100%; /* Use 100% width to maximize space */
+        height: 500px; /* Adjust the height as needed */
+        margin: 0 auto; /* Center the chart horizontally */
+      }
+
+      /* Style for the Exit button */
+      #exitButton {
+        padding: 15px; /* Adjust the padding for button size */
+        font-size: 18px; /* Adjust the font size for button text */
+        background-color: #4CAF50; /* Green color, you can change it to any color you prefer */
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    </style>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart', 'line']});
+      google.charts.setOnLoadCallback(drawCharts);
+
+      function drawCharts() {
+        drawPieChart();
+        drawLineChart();
+        drawBarChart(); // Add this line to include the bar chart
+      }
+
+      function drawPieChart() {
+        var dataPie = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['Prawns', 11],
+          ['Salmon', 2],
+          ['Tuna', 2],
+          ['Tilapia', 2],
+          ['Bangrus', 7]
+        ]);
+
+        var optionsPie = {
+          title: 'ILOILO FISHING PORT ANALYTICS'
+        };
+
+        var chartPie = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chartPie.draw(dataPie, optionsPie);
+      }
+
+      function drawLineChart() {
+        var dataLine = new google.visualization.DataTable();
+        dataLine.addColumn('number', 'Day');
+        dataLine.addColumn('number', 'Bangrus');
+        dataLine.addColumn('number', 'Tuna');
+        dataLine.addColumn('number', 'Tilapia');
+
+        dataLine.addRows([
+          [1,  37.8, 80.8, 41.8],
+          [2,  30.9, 69.5, 32.4],
+          [3,  25.4,   57, 25.7],
+          [4,  11.7, 18.8, 10.5],
+          [5,  11.9, 17.6, 10.4],
+          [6,   8.8, 13.6,  7.7],
+          [7,   7.6, 12.3,  9.6],
+          [8,  12.3, 29.2, 10.6],
+          [9,  16.9, 42.9, 14.8],
+          [10, 12.8, 30.9, 11.6],
+          [11,  5.3,  7.9,  4.7],
+          [12,  6.6,  8.4,  5.2],
+          [13,  4.8,  6.3,  3.6],
+          [14,  4.2,  6.2,  3.4]
+        ]);
+
+        var optionsLine = {
+          chart: {
+            title: 'ILOILO FISHING PORT ANALYTICS'
+          }
+        };
+
+        var chartLine = new google.charts.Line(document.getElementById('linechart'));
+
+        chartLine.draw(dataLine, google.charts.Line.convertOptions(optionsLine));
+      }
+
+      function drawBarChart() {
+        var dataBar = google.visualization.arrayToDataTable([
+          ['Month', 'Visitations', { role: 'style' } ],
+          ['January', 10, 'color: gray'],
+          ['February', 14, 'color: #76A7FA'],
+          ['March', 16, 'opacity: 0.2'],
+          ['April', 22, 'stroke-color: #703593; stroke-width: 4; fill-color: #C5A5CF'],
+          ['May', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2']
+        ]);
+
+        var optionsBar = {
+          title: 'ILOILO FISHING PORT ANALYTICS'
+        };
+
+        var chartBar = new google.visualization.ColumnChart(document.getElementById('barchart'));
+
+        chartBar.draw(dataBar, optionsBar);
+      }
+    </script>
+  </head>
+
+  <body>
+    <div class="chart-container" id="piechart" class="chart"></div>
+    <div class="chart-container" id="linechart" class="chart"></div>
+    <div class="chart-container" id="barchart" class="chart"></div>
+
+    
+    <button id="exitButton" onclick="goToHomepage()">Exit</button>
+
+    <script>
+      function goToHomepage() {
+        window.location.href = "Homepage.html";
+      }
+    </script>
+  </body>
+</html>
+

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <h1><center><b>MANAGEMENT</b></center></h1>
+    <title>MANAGEMENT</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
+    <style>
+        .table-header-blue {
+            background-color: #007bff;
+            color: #fff;
+        }
+        .exit{
+            position: absolute;
+            top: 10px;
+            left: 30px;
+            color:  rgb(252, 98, 98);
+            font-size: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    
+    <a href="Admin.html"><div class="exit"><i class="far fa-times-circle"></i></div></a>
+
+    <div class="container mt-3">
+        <table class="table">
+            <thead class="table-header-blue">
+                <th>No</th>
+                <th>Owner</th>
+                <th>Captain</th>
+                <th>Contact Number</th>
+                <th>Type of Vessel</th>
+                <th>Purpose of Fishing</th>
+            </thead>
+            <tbody id="tbody1"></tbody>
+        </table>
+    </div>
+
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    <script>
+        var studio = 0;
+        var tbody = document.getElementById("tbody1");
+        var theVessels = [
+            { Owner: "James", Captain: "Jake", ContactNumber: "092934052324", TypeofVessel: "Fishing Vessel", PurposeofFishing: "Commercial" },
+            { Owner: "Vince", Captain: "Lebron", ContactNumber: "0987364253", TypeofVessel: "Fishing Vessel", PurposeofFishing: "Recreational" }
+        ];
+
+        function AddItemToTable(Owner, Captain, ContactNumber , TypeofVessel, FishingVessel) {
+            let tr = document.createElement("tr");
+            let td1 = document.createElement("td");
+            let td2 = document.createElement("td");
+            let td3 = document.createElement("td");
+            let td4 = document.createElement("td");
+            let td5 = document.createElement("td");
+            let td6 = document.createElement("td");
+
+            studio++;
+            td1.innerHTML = studio;
+            td2.innerHTML = Owner;
+            td3.innerHTML = Captain;
+            td4.innerHTML = ContactNumber;
+            td5.innerHTML = TypeofVessel;
+            td6.innerHTML = FishingVessel;
+
+            tr.appendChild(td1);
+            tr.appendChild(td2);
+            tr.appendChild(td3);
+            tr.appendChild(td4);
+            tr.appendChild(td5);
+            tr.appendChild(td6);
+
+            tbody.appendChild(tr);
+        }
+
+        function PopulateTable() {
+            studio = 0;
+            tbody.innerHTML = "";
+            theVessels.forEach(element => {
+                AddItemToTable(element.Owner, element.Captain, element.ContactNumber, element.TypeofVessel, element.PurposeofFishing);
+            });
+        }
+
+        PopulateTable();
+    </script>
+</body>
+
+</html>
